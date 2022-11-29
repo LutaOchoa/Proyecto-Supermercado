@@ -1,8 +1,9 @@
-const shopContent= document.getElementById("shopContent")
-const verCarrito=document.getElementById("verCarrito")
-const modalContainer=document.getElementById("modal-container")
+const shopContent= document.getElementById("shopContent");
+const verCarrito=document.getElementById("verCarrito");
+const modalContainer=document.getElementById("modal-container");
+const cantidadCarrito=document.getElementById("cantidadCarrito");
 
-let carrito=[];
+let carrito= JSON.parse(localStorage.getItem("carrito")) || [];
 
 productos.forEach((product)=> {
     let content=document.createElement("div");
@@ -21,54 +22,29 @@ productos.forEach((product)=> {
     content.append(comprar);
 
     comprar.addEventListener("click",() =>{
+
+    const repeat=carrito.some((repeatProduct) => repeatProduct.id===product.id);
+    if(repeat){
+        carrito.map((prod)=>{
+            if(prod.id===product.id){
+                prod.cantidad++;
+            }
+        });
+    } else{
         carrito.push({
             id:product.id,
             img:product.img,
             nombre:product.nombre,
             precio:product.precio,
+            cantidad:product.cantidad,
         });
+    }
+    carritoCounter();
+    saveLocal();
     });
 });
 
-verCarrito.addEventListener("click",()=>{
-    modalContainer.innerHTML="";
-    modalContainer.style.display="flex";
-    const modalHeader =document.createElement("div");
-    modalHeader.className="modal-header";
-    modalHeader.innerHTML=`
-        <h1 class="modal-header-title">Carrito.</h1>
-    `;
-    modalContainer.append(modalHeader);
+const saveLocal= ()=>{
+    localStorage.setItem("carrito", JSON.stringify(carrito) );
+};
 
-    const modalbutton=document.createElement("h1");
-    modalbutton.innerText="x";
-    modalbutton.className="modal-header-button";
-
-    modalbutton.addEventListener("click", ()=> {
-        modalContainer.style.display="none";
-    });
-
-    modalHeader.append(modalbutton);
-
-
-    carrito.forEach((product) => {
-        
-        let carritoContent=document.createElement("div");
-        carritoContent.className="modal-content";
-        carritoContent.innerHTML=`
-            <img src="${product.img}">
-            <h3>${product.nombre}</h3>
-            <p>${product.precio} $</p>
-        `;
-
-        modalContainer.append(carritoContent);
-    });
-    
-
-    const total=carrito.reduce((acc,el)=> acc + el.precio,0);
-
-    const totalBuying= document.createElement("div");
-    totalBuying.className="total-content";
-    totalBuying.innerHTML=`total a pagar: ${total} $`;
-    modalContainer.append(totalBuying);
-});
