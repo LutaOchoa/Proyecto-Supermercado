@@ -35,7 +35,21 @@ const pintarCarrito =()=>{
 
         modalContainer.append(carritoContent);
 
+        let restar = carritoContent.querySelector(".restar")
+        restar.addEventListener("click",() =>{
+            if(product.cantidad!==1){
+                product.cantidad--;
+            }
+            saveLocal();      
+            pintarCarrito();
+        })
 
+        let sumar = carritoContent.querySelector(".sumar")
+        sumar.addEventListener("click",() =>{
+            product.cantidad++;  
+            saveLocal();                    
+            pintarCarrito();
+        })
 
         let eliminar = document.createElement("span");
         eliminar.innerText="❌";
