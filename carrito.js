@@ -42,6 +42,13 @@ const pintarCarrito =()=>{
             }
             saveLocal();      
             pintarCarrito();
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Eliminaste un producto',
+                showConfirmButton: false,
+                timer: 1000
+              })
         })
 
         let sumar = carritoContent.querySelector(".sumar")
@@ -49,11 +56,13 @@ const pintarCarrito =()=>{
             product.cantidad++;  
             saveLocal();                    
             pintarCarrito();
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-              )
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Agregaste un producto',
+                showConfirmButton: false,
+                timer: 1000
+              })
         })
 
         let eliminar = document.createElement("span");
@@ -62,6 +71,7 @@ const pintarCarrito =()=>{
         carritoContent.append(eliminar);
 
         eliminar.addEventListener("click",eliminarProducto)
+        
     });
     
 
