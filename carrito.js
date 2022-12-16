@@ -49,6 +49,11 @@ const pintarCarrito =()=>{
             product.cantidad++;  
             saveLocal();                    
             pintarCarrito();
+            Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+              )
         })
 
         let eliminar = document.createElement("span");

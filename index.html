@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sweetalert2.min.css"/>
     <title>Carrito</title>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     
@@ -20,6 +23,7 @@
     <div class="banner-container">
         <h1>Supermercado</h1>
         <p>Simulador</p>
+        <button id="click" > ? </button>
     </div>
 </div>
 
@@ -29,8 +33,18 @@
     
 
 <script src="products.js"></script>
-    <script src="app.js"></script>
-    <script src="carrito.js"></script>
-    
+<script src="app.js"></script>
+<script src="carrito.js"></script>
+<script>
+    $('#click').on('click',function(){
+        Swal.fire(
+        'Bienvenido al simulador',
+         'Agrega los productos de la parte inferior que desees y revisalos en el carrito de compras de arriba a la derecha',
+         'question'
+        )
+    })
+</script>
+
+
 </body>
 </html>

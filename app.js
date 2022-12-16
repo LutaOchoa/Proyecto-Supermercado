@@ -28,6 +28,7 @@ productos.forEach((product)=> {
         carrito.map((prod)=>{
             if(prod.id===product.id){
                 prod.cantidad++;
+                
             }
         });
     } else{
@@ -41,6 +42,7 @@ productos.forEach((product)=> {
     }
     carritoCounter();
     saveLocal();
+    
     });
 });
 
